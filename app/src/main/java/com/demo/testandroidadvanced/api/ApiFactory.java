@@ -12,8 +12,11 @@ public class ApiFactory {
 
     private ApiFactory() {
         retrofit = new Retrofit.Builder()
+                // добавляем преобразователь Gson, который преобразует json в объекты
                 .addConverterFactory(GsonConverterFactory.create())
+                // добавляем CallAdapter, чтобы следить, преобразование данных прошло успешно или нет
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                // добавляем базовый url, который обязательно должен заканчиваться "/"
                 .baseUrl(BASE_URL)
                 .build();
     }
