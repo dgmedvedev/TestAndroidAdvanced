@@ -8,8 +8,8 @@ import retrofit2.http.GET;
 
 public interface ApiService {
     @GET("testTask.json")
-        // Оборачиваем в Observable для того, чтобы при получении данных,
+        // Получаем Observable для того, чтобы при получении данных,
         // мы знали результат выполнения этого метода (данные получены или исключение)
-        // Реализуется в MainActivity
+        // Реализуется в EmployeeListPresenter
     Observable<EmployeeResponse> getEmployees();
 }
