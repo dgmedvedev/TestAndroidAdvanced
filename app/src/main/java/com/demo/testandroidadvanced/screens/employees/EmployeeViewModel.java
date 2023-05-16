@@ -36,7 +36,7 @@ public class EmployeeViewModel extends AndroidViewModel {
         return employees;
     }
 
-    public void insertEmployees(List<Employee> employees) {
+    private void insertEmployees(List<Employee> employees) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             if (employees != null) {
@@ -45,7 +45,7 @@ public class EmployeeViewModel extends AndroidViewModel {
         });
     }
 
-    public void deleteAllEmployees() {
+    private void deleteAllEmployees() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             db.employeeDao().deleteAllEmployees();
@@ -60,6 +60,8 @@ public class EmployeeViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(employeeResponse -> {
+                            deleteAllEmployees();
+                            insertEmployees(employeeResponse.getEmployees());
                         },
                         throwable -> {
                         });
