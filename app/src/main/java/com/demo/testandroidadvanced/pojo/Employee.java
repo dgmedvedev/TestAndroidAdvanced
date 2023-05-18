@@ -1,11 +1,20 @@
 package com.demo.testandroidadvanced.pojo;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.demo.testandroidadvanced.converters.Converter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@Entity(tableName = "employeesMVVM")
+@TypeConverters(value = Converter.class)
 public class Employee {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     @SerializedName("f_name")
     @Expose
     private String name;
@@ -21,6 +30,14 @@ public class Employee {
     @SerializedName("specialty")
     @Expose
     private List<Specialty> specialty;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
